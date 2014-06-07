@@ -226,14 +226,8 @@ class Main extends CI_Controller {
 		{
 			$this->output->enable_profiler(FALSE);
 			$this->load->library('datatables');
-			if($this->input->get('view')=='lunas') 
-			{
-				$this->datatables->where('pinjaman.status >= pinjaman.lama');
-			}
-			elseif ($this->input->get('view')=='belum_lunas') 
-			{
-				$this->datatables->where('pinjaman.status < pinjaman.lama');
-			}
+			if($this->input->get('jenis')) if($this->input->get('jenis')) $this->db->where('pinjaman.jenis', $this->input->get('jenis'));
+			if($this->input->get('per')) $this->datatables->where('DATE_FORMAT(pinjaman.tanggal, "%Y-%m") =', $this->input->get('per'));
 	        $this->datatables->select('nasabah.kode, nasabah.nama, pinjaman.tanggal, pinjaman.jenis, FORMAT(pinjaman.jumlah, 0) as jumlah, pinjaman.lama, pinjaman.status, pinjaman.id, nasabah.kode', FALSE);
 	        $this->datatables->from('nasabah');
 	        $this->datatables->join('pinjaman','pinjaman.kode_nasabah=nasabah.kode');
@@ -281,6 +275,16 @@ class Main extends CI_Controller {
 					break;
 				case 'delete':
 					$this->_delete('pinjaman',$id);
+					break;
+				case 'laporan':
+				if($this->input->get('export')){
+						header("Content-type: application/vnd.ms-excel");
+						header("Content-Disposition: attachment; filename=Laporan-Pinjaman.xls");
+						$data['pinjaman'] = $this->mdb->getLaporanPinjaman();
+						$this->load->view('pinjaman/export',$data);
+				}else{
+					$this->_template('pinjaman/laporan_pinjaman');
+				}
 					break;
 				default:
 					$this->_template('pinjaman/pinjaman');

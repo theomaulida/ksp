@@ -180,6 +180,16 @@ class Mdb extends CI_Model
         return $dropdown;
     }
 
+    function getPeriodePinjaman()
+    {
+        $query = $this->db->query('SELECT DATE_FORMAT(tanggal, "%Y-%m") as ukey, DATE_FORMAT(tanggal, "%M %Y") as periode  FROM `pinjaman` order by tanggal asc');
+        $dropdown[''] = '-- Semua --';
+        foreach ($query->result() as $row) {
+            $dropdown[$row->ukey] = $row->periode;
+        }
+        return $dropdown;
+    }
+
     function getLaporanSimpanan()
     {
         if($this->input->get('jenis')) $this->db->where('simpanan.jenis', $this->input->get('jenis'));
@@ -190,6 +200,17 @@ class Mdb extends CI_Model
 
         $this->db->join('(select * from simpanan order by tanggal desc) as simpanan','simpanan.kode_nasabah=nasabah.kode');
         $this->db->group_by('simpanan.kode_nasabah');
+        $query = $this->db->get();
+        return $query->result();
+    } 
+
+    function getLaporanPinjaman()
+    {
+        if($this->input->get('jenis')) $this->db->where('pinjaman.jenis', $this->input->get('jenis'));
+        if($this->input->get('per')) $this->db->where('DATE_FORMAT(pinjaman.tanggal, "%Y-%m") =', $this->input->get('per'));
+        $this->db->select('nasabah.kode, nasabah.nama, pinjaman.tanggal, pinjaman.jenis, FORMAT(pinjaman.jumlah, 0) as jumlah, pinjaman.lama, pinjaman.status, pinjaman.id, nasabah.kode', FALSE);
+        $this->db->from('nasabah');
+        $this->db->join('pinjaman','pinjaman.kode_nasabah=nasabah.kode');
         $query = $this->db->get();
         return $query->result();
     }
