@@ -8,7 +8,7 @@ class Main extends CI_Controller {
 		$this->load->helper("date");
 		$this->load->library('export');
 		$this->load->library('form_validation');
-		// $this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(TRUE);
 	}
 
 	public function index()
@@ -311,19 +311,30 @@ class Main extends CI_Controller {
 
 			switch ($action) 
 			{
-/*				case 'add':
-					$this->form_validation->set_rules('kode', 'Kode anggota', 'trim|required|is_unique[nasabah.kode]');
-					if ($this->form_validation->run() == FALSE)
+				case 'import':
+					$this->_add('payroll');
+					break;
+				case 'upload':
+					$config['upload_path'] = dirname($_SERVER["SCRIPT_FILENAME"])."/assets/";
+					$config['overwrite'] = true;
+					$config['allowed_types'] = '*';
+					$config['max_size']	= '1000000';
+
+					$this->load->library('upload', $config);
+
+					if ( ! $this->upload->do_upload('payroll'))
 					{
-						$this->_add('payroll');
+						$error = array('error' => $this->upload->display_errors());
+						print_r($error);
+						// $this->_add('payroll');
 					}
 					else
 					{
-						$this->mdb->add_nasabah();
-						redirect('main/payroll');
+						$data['file'] = $this->upload->data();
+						$this->_template('payroll/overview', $data);
 					}
 					break;
-				case 'edit':
+			/*	case 'edit':
 					$this->form_validation->set_rules('kode', 'Kode anggota', 'trim|required|is_unique[nasabah.kode.id.'.$id.']');
 					if ($this->form_validation->run() == FALSE)
 					{
