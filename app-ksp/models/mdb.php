@@ -18,6 +18,18 @@ class Mdb extends CI_Model
         return $jadi;
     }
 
+    function import($arr)
+    {
+        $this->db->truncate('import_temp');
+        $this->db->insert_batch('import_temp', $arr);
+    }
+
+    function get_import(){
+        $this->db->join('nasabah','nasabah.kode=import_temp.kode');
+        $query = $this->db->get('import_temp');
+        return $query->result();
+    }
+
     function get_nasabah($kode)
     {
         $this->db->where('kode', $kode);

@@ -22,9 +22,9 @@
 		<table class="dynamicTable table table-striped table-bordered table-primary table-condensed">
 			<thead>
 				<tr>
-					<th>NO</th>
+					<!-- <th>NO</th> -->
+					<th width="20%">NAMA</th>
 					<th>NO.PEG</th>
-					<th width="20%">NAMA_ANGGOTA</th>
 					<th>ANGS_UANG</th>
 					<th>JASA_UANG</th>
 					<th>ANGS_BARANG</th>
@@ -32,7 +32,7 @@
 					<th>MASUK_ANGGOTA</th>
 					<th>SUKARELA</th>
 					<th>SRPLUS</th>
-					<th>KURANG_PERSEN</th>
+					<th>KRG_POTONG</th>
 					<th>TOTAL</th>
 					<th>JKT</th>
 					<th>SELISIH</th><!-- 

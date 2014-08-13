@@ -3,7 +3,7 @@
 				
 		<div id="content">
 
-			<div id="login"><h3>Login Tabungan Sekolah</h3>
+			<div id="login"><h3>Login</h3>
 	<form class="form-signin" method="post" action="login" />
 		<label class="strong">Username</label>
 		<input type="text" class="input-block-level" name="username" placeholder="Username" required autofocus/>

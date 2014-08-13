@@ -23,17 +23,21 @@
 <?php 
 	$file = './assets/'.$file['file_name'];
 	$handle = fopen($file,"r");
-	 $data = fgetcsv($handle,1000,",","'"," ");
-	 print_r($data);
-	 foreach ($data as $key => $value) {
-	 	 echo $value.'<br>';
-	 }
 
-	// while ($data = fgetcsv($handle,1000,",","'"," "))
-	// {
- //            echo $data[0].'<br>';
- //            // echo addslashes($data[1]).'<br>';
-	// } 
+$arr2 = array();
+	while(!feof($handle)){
+		$data = fgetcsv($handle,1000,","," ");
+		$arr = array('kode'=>$data[0],'amount'=>$data[2]);
+		array_push($arr2, $arr);
+	}
+		/*echo '<pre>';
+			print_r($arr2);
+		echo '</pre>';*/
+		$this->mdb->import($arr2);
+		$db = $this->mdb->get_import();
+		foreach ($db as $key) {
+			echo $key->kode.' '.$key->nama.' '.$key->amount.'<br>';
+		}
  ?>
 
 </table>

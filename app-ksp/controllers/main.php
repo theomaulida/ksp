@@ -300,10 +300,11 @@ class Main extends CI_Controller {
 		{
 			$this->output->enable_profiler(FALSE);
 			$this->load->library('datatables');
-	        $this->datatables->select('nasabah.id, nasabah.kode, nasabah.nama, FORMAT(sukarela.jumlah, 0) as sukarela, FORMAT(srplus.jumlah, 0) as srplus', FALSE);
+	        $this->datatables->select('nasabah.nama,nasabah.kode, FORMAT(sukarela.jumlah, 0) as sukarela, FORMAT(srplus.jumlah, 0) as srplus, FORMAT(import_temp.amount, 0) as jkt', FALSE);
 	        $this->datatables->from('nasabah');
 	        $this->datatables->join('(SELECT kode_nasabah, sum(jumlah) as jumlah FROM `simpanan` where jenis = "Sukarela" group by kode_nasabah) as sukarela', 'sukarela.kode_nasabah=nasabah.kode');
 	        $this->datatables->join('(SELECT kode_nasabah, sum(jumlah) as jumlah FROM `simpanan` where jenis = "Surplus" group by kode_nasabah) as srplus', 'srplus.kode_nasabah=nasabah.kode');
+	        $this->datatables->join('import_temp', 'import_temp.kode=nasabah.kode', 'left');
 	        echo $this->datatables->generate();
 		}
 		else
@@ -334,21 +335,6 @@ class Main extends CI_Controller {
 						$this->_template('payroll/overview', $data);
 					}
 					break;
-			/*	case 'edit':
-					$this->form_validation->set_rules('kode', 'Kode anggota', 'trim|required|is_unique[nasabah.kode.id.'.$id.']');
-					if ($this->form_validation->run() == FALSE)
-					{
-						$this->_edit('payroll',$id);
-					}
-					else
-					{
-						$this->mdb->edit_nasabah($id);
-						redirect('main/payroll');
-					}
-					break;
-				case 'delete':
-					$this->_delete('payroll',$id);
-					break;*/
 				default:
 					$this->_template('payroll/payroll');
 					break;
