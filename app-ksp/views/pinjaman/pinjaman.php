@@ -30,7 +30,7 @@
 		<table class="dynamicTable table table-striped table-bordered table-primary table-condensed">
 			<thead>
 				<tr>
-					<th>NO PEGAWAI</th>
+					<th>NO_ANGGOTA</th>
 					<th>NAMA_ANGGOTA</th>
 					<th>TANGGAL</th>
 					<th>JENIS</th>

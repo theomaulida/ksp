@@ -9,7 +9,7 @@ echo validation_errors();
 	<form method="get" class="form-horizontal">
 	<fieldset>
 	<div class="input-append control-group">
-	  	<label class="control-label" for="kode">NO PEGAWAI</label><div class="controls"> <input class="span12" id="kode" name="kode" type="text" placeholder="NO PEGAWAI" value="<?php echo $keyword; ?>" autofocus required/>
+	  	<label class="control-label" for="kode">NO ANGGOTA</label><div class="controls"> <input class="span12" id="kode" name="kode" type="text" placeholder="NO ANGGOTA" value="<?php echo $keyword; ?>" autofocus required/>
 	  	<button class="btn" type="submit"><i class="icon-search"></i></button></div>
 	</div>
 	</fieldset>

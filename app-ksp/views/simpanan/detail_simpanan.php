@@ -10,7 +10,7 @@
 				$nasabah = $this->mdb->getDetailSimpanan($kode, $periode);
 
 				foreach ($nasabah as $key); 
-				echo '<h5>NO PEGAWAI : <b>'.$key->kode.'</b><br> NAMA : <b>'.$key->nama.'</b><br>';
+				echo '<h5>NO ANGGOTA : <b>'.$key->kode.'</b><br> NAMA : <b>'.$key->nama.'</b><br>';
 				echo 'DEPARTEMEN : <b>'.$key->departemen.'</b><br>TANGGAL MASUK : <b>'.$key->tgl_masuk.'</b></h5>';
 				
 			if(!$periode)

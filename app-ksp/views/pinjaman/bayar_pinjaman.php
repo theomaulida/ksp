@@ -9,8 +9,8 @@ echo validation_errors();
 	<form method="get" class="form-horizontal">
 	<fieldset>
 	<div class="input-append control-group">
-	  	<label class="control-label" for="kode">NO. PEGAWAI</label><div class="controls"> 
-	  		<input class="span8" id="kode" name="kode" type="text" placeholder="NO. PEGAWAI" value="<?php echo $keyword; ?>" autofocus required/>
+	  	<label class="control-label" for="kode">NO. ANGGOTA</label><div class="controls"> 
+	  		<input class="span8" id="kode" name="kode" type="text" placeholder="NO. ANGGOTA" value="<?php echo $keyword; ?>" autofocus required/>
 	  	<button class="btn" type="submit"><i class="icon-search"></i></button></div>
 	</div>
 	</fieldset>
@@ -24,7 +24,7 @@ echo validation_errors();
 	 if($keyword!=""){
 	 	$result = $this->mdb->getPinjaman($keyword);
 			foreach ($result as $row);
-			if(!$result){echo "<h3>Data Tidak ditemukan</h3>Pastikan anda memasukkan nomor PEGAWAI dengan benar";}else{ ?>
+			if(!$result){echo "<h3>Data Tidak ditemukan</h3>Pastikan anda memasukkan nomor ANGGOTA dengan benar";}else{ ?>
 <?php echo form_open('',array('class'=>'form-horizontal','style'=>'margin-bottom: 0;'));?>
 <div class="widget widget-4 widget-body-white">
 		<fieldset>

@@ -17,7 +17,7 @@
 			<thead>
 				<tr>
 					<th>NO</th>
-					<th>NO PEGAWAI</th>
+					<th>NO_ANGGOTA</th>
 					<th width="20%">NAMA_ANGGOTA</th>
 					<th>DEPARTEMEN</th>
 					<th>TGL MASUK</th>

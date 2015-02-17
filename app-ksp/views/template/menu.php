@@ -19,9 +19,9 @@
 						<li <?php if('pinjaman'==$this->uri->segment(2)) echo 'class="active"';?>>
 							<a href="<?php echo site_url('main/pinjaman')?>" class="menuToggle">Pinjaman</a>
 						</li>
-						<li <?php if('payroll'==$this->uri->segment(2)) echo 'class="active"';?>>
+						<!-- <li <?php if('payroll'==$this->uri->segment(2)) echo 'class="active"';?>>
 							<a href="<?php echo site_url('main/payroll')?>" class="menuToggle">Adjust Payroll</a>
-						</li>
+						</li> -->
 						<?php if($this->session->userdata('level')=="admin"){?>
 						<li <?php if('user'==$this->uri->segment(2)) echo 'class="active"';?>><a href="<?php echo site_url('main/user')?>"><span>Admin</span></a></li>
 						<?php } ?>

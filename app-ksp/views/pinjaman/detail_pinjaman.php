@@ -7,7 +7,7 @@
 				$pinjaman = $this->mdb->getPinjaman($kode);
 				foreach ($pinjaman as $key); 
 				echo '<table>';
-				echo '<tr><td>NO. PEGAWAI </td><td>: <b>'.$key->kode.'</b></td> <td>TANGGAL PINJAM</td><td>: <b>'.$key->tanggal.'</b></td> </tr>';
+				echo '<tr><td>NO. ANGGOTA </td><td>: <b>'.$key->kode.'</b></td> <td>TANGGAL PINJAM</td><td>: <b>'.$key->tanggal.'</b></td> </tr>';
 				echo '<tr><td> NAMA </td><td>: <b>'.$key->nama.'</b></td> <td>JENIS PINJAM</td><td>: <b>'.$key->jenis.'</b></td> </tr>';
 				echo '<tr><td> DEPARTEMEN </td><td>: <b>'.$key->departemen.'</b></td> <td>JUMLAH PINJAM</td><td>: <b> Rp. '.buatrp($key->jumlah).'</b></td> </tr>';
 				echo '<tr><td>TANGGAL MASUK </td><td>: <b>'.$key->tgl_masuk.'</b></td> <td>LAMA PINJAM</td><td>: <b>'.$key->lama.' x </b></td> </tr>';

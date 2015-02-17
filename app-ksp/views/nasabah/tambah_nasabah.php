@@ -13,7 +13,7 @@ echo form_open('',$atribut)?>
 	<div class="row-fluid">
 		<div class="span6">
 			<div class="control-group">
-				<label class="control-label" for="firstname">NO PEGAWAI</label>
+				<label class="control-label" for="firstname">NO ANGGOTA</label>
 				<div class="controls">
 					<input class="span12" id="firstname" name="kode" type="text" value="<?php echo set_value('kode')?>" required autofocus/>
 					<?php echo form_error('kode','<label class="label-warning">','</label>'); ?>

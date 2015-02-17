@@ -8,7 +8,7 @@ class Main extends CI_Controller {
 		$this->load->helper("date");
 		$this->load->library('export');
 		$this->load->library('form_validation');
-		$this->output->enable_profiler(TRUE);
+		// $this->output->enable_profiler(TRUE);
 	}
 
 	public function index()

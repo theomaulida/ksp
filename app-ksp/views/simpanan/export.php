@@ -16,7 +16,7 @@
 <table border="1">
 	<thead>
 		<tr>
-			<th>NO PEGAWAI</th>
+			<th>NO ANGGOTA</th>
 			<th>NAMA ANGGOTA</th>
 			<!-- <th>JENIS</th> -->
 			<th>TANGGAL</th>
