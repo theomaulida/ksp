@@ -4,6 +4,7 @@ class Main extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model("mdb");
+		$this->load->model("keanggotaan");
 		$this->load->helper("form");
 		$this->load->helper("date");
 		$this->load->library('export');
@@ -100,6 +101,9 @@ class Main extends CI_Controller {
 		else
 		{
 			$this->form_validation->set_rules('nama', 'Nama anggota', 'trim|required');
+			$this->form_validation->set_rules('alamat', 'Alamat', 'trim');
+			$this->form_validation->set_rules('hp', 'HP', 'trim');
+			$this->form_validation->set_rules('keanggotaan_id', 'Keanggotaan', 'trim|required');
 			$this->form_validation->set_rules('tgl_masuk', 'Tanggal masuk', 'trim|required');
 			$this->form_validation->set_message('required', 'Harus diisi.');
 			$this->form_validation->set_message('is_unique', 'Sudah ada didatabase.');
@@ -135,6 +139,65 @@ class Main extends CI_Controller {
 					break;
 				default:
 					$this->_template('nasabah/nasabah');
+					break;
+			}
+		}
+	}
+
+	public function keanggotaan($action='', $id='')
+	{
+		if($this->session->userdata('logged_in')!=TRUE) redirect('main/logout');
+		if($this->input->is_ajax_request()/*||$this->input->get('data')*/)
+		{
+			$this->output->enable_profiler(FALSE);
+			$this->load->library('datatables');
+	        $this->datatables->select('id, jenis, bunga_simpanan, denda_pinjaman, keterangan');
+	        $this->datatables->from('keanggotaan');
+	        $this->datatables->add_column('Action_data', anchor('main/keanggotaan/edit/$1','EDIT','class="btn btn-warning btn-mini hidden-print"').
+	        	anchor('main/keanggotaan/delete/$1','DELETE',array('class'=>'btn btn-danger btn-mini hidden-print', 'onClick'=>'return confirm(\'Apakah Anda benar-benar akan menghapus data ini?\')')), 'id');
+	        echo $this->datatables->generate();
+		}
+		else
+		{
+			$this->form_validation->set_rules('nama', 'Nama anggota', 'trim|required');
+			$this->form_validation->set_rules('alamat', 'Alamat', 'trim');
+			$this->form_validation->set_rules('hp', 'HP', 'trim');
+			$this->form_validation->set_rules('keanggotaan_id', 'Keanggotaan', 'trim|required');
+			$this->form_validation->set_rules('tgl_masuk', 'Tanggal masuk', 'trim|required');
+			$this->form_validation->set_message('required', 'Harus diisi.');
+			$this->form_validation->set_message('is_unique', 'Sudah ada didatabase.');
+
+			switch ($action) 
+			{
+				case 'add':
+					$this->form_validation->set_rules('kode', 'Kode anggota', 'trim|required|is_unique[keanggotaan.kode]');
+					if ($this->form_validation->run() == FALSE)
+					{
+						$this->_add('keanggotaan');
+					}
+					else
+					{
+						$this->mdb->add_nasabah();
+						redirect('main/keanggotaan');
+					}
+					break;
+				case 'edit':
+					$this->form_validation->set_rules('kode', 'Kode anggota', 'trim|required|is_unique[keanggotaan.kode.id.'.$id.']');
+					if ($this->form_validation->run() == FALSE)
+					{
+						$this->_edit('keanggotaan',$id);
+					}
+					else
+					{
+						$this->mdb->edit_nasabah($id);
+						redirect('main/keanggotaan');
+					}
+					break;
+				case 'delete':
+					$this->_delete('keanggotaan',$id);
+					break;
+				default:
+					$this->_template('keanggotaan/keanggotaan');
 					break;
 			}
 		}

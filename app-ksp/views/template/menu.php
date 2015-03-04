@@ -11,13 +11,16 @@
 		
 					<ul id="menu" class="hidden-phone">
 						<li <?php if('nasabah'==$this->uri->segment(2)) echo 'class="active"';?>>
-							<a href="<?php echo site_url('main/nasabah')?>" class="menuToggle">Anggota</a>
+							<a href="<?php echo site_url('main/nasabah')?>" class="menuToggle">Nasabah</a>
 						</li>
 						<li <?php if('simpanan'==$this->uri->segment(2)) echo 'class="active"';?>>
 							<a href="<?php echo site_url('main/simpanan')?>" class="menuToggle">Simpanan</a>
 						</li>
 						<li <?php if('pinjaman'==$this->uri->segment(2)) echo 'class="active"';?>>
 							<a href="<?php echo site_url('main/pinjaman')?>" class="menuToggle">Pinjaman</a>
+						</li>
+						<li <?php if('keanggotaan'==$this->uri->segment(2)) echo 'class="active"';?>>
+							<a href="<?php echo site_url('main/keanggotaan')?>" class="menuToggle">Keanggotaan</a>
 						</li>
 						<!-- <li <?php if('payroll'==$this->uri->segment(2)) echo 'class="active"';?>>
 							<a href="<?php echo site_url('main/payroll')?>" class="menuToggle">Adjust Payroll</a>

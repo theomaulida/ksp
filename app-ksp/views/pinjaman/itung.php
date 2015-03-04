@@ -2,7 +2,7 @@
 
 
 $pinjam = $this->input->get('nominal');
-$bunga = 1.65/100;
+$bunga = 2/100;
 
 if($this->input->get('lama'))
 {

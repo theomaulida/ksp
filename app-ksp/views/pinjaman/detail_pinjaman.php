@@ -20,7 +20,7 @@
 <?php
 
 $pinjam = $key->jumlah;
-$bunga = 1.65/100;
+$bunga = 2/100;
 $angsur = $key->lama;
 $angsuran = $pinjam/$angsur;
 

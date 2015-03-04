@@ -41,6 +41,9 @@ class Mdb extends CI_Model
     {
         $this->kode = $this->input->post('kode');
         $this->nama = $this->input->post('nama');
+        $this->alamat = $this->input->post('alamat');
+        $this->hp = $this->input->post('hp');
+        $this->keanggotaan_id = $this->input->post('keanggotaan_id');
         $this->departemen = $this->input->post('departemen');
         $this->tgl_masuk = $this->input->post('tgl_masuk');
         // $this->created = now();
