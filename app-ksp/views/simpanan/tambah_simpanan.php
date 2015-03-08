@@ -36,15 +36,17 @@ echo validation_errors();
 				<div class="controls"><input class="span6" id="username" value="<?php echo $row->nama?>" type="text" disabled/>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label" for="username">DEPARTEMEN</label>
-				<div class="controls"><input class="span6" id="username" value="<?php echo $row->departemen?>" type="text" disabled/>
-					
-				</div>
-			</div>
+			
 			<div class="control-group">
 				<label class="control-label" for="saldo">SALDO</label>
 				<div class="controls"><input class="span6" id="saldo" value="<?php echo buatrp($row->saldo)?>" type="text" disabled/>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="keanggotaan">KEANGGOTAAN</label>
+				<?php $a = $this->nasabah->getDetail($row->id_nasabah); foreach ($a as $key);?>
+				<div class="controls"><input class="span6" id="keanggotaan" value="<?php echo $key->jenis?>" type="text" disabled/>
 				</div>
 			</div>
 
@@ -59,7 +61,14 @@ echo validation_errors();
 				<label class="control-label" for="jt">JENIS SIMPANAN</label>
 				<div class="controls">
 					<?php 
-					 echo form_dropdown('jenis',array(''=>'-- Pilih --','Pokok'=>'Pokok','Wajib'=>'Wajib','Sukarela'=>'Sukarela','Surplus'=>'Sukarela Plus'),'','required="required" onChange="setNominal(this.value)"');?>
+					$arr_drop = array(''=>'-- Pilih --','Sukarela'=>'Sukarela');
+					if ($key->simpanan_pokok) {
+						$arr_drop['Pokok']='Pokok';
+					}
+					if ($key->simpanan_wajib) {
+						$arr_drop['Wajib']='Wajib';
+					}
+					 echo form_dropdown('jenis',$arr_drop,'','required="required" onChange="setNominal(this.value)"');?>
 				</div>
 			</div>
 			<div class="control-group">
@@ -79,12 +88,12 @@ echo validation_errors();
 	function setNominal (jenis) {
 		if(jenis=='Pokok')
 		{
-			document.getElementById('nominal').value = 50000;
+			document.getElementById('nominal').value = <?php echo $key->simpanan_pokok; ?>;
 			document.getElementById('nominal').setAttribute("readonly", "readonly");
 		}
 		else if(jenis=='Wajib')
 		{
-			document.getElementById('nominal').value = 200000;
+			document.getElementById('nominal').value = <?php echo $key->simpanan_wajib; ?>;
 			document.getElementById('nominal').setAttribute("readonly", "readonly");
 		}
 		else

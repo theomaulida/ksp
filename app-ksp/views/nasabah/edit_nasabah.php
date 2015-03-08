@@ -42,16 +42,16 @@ echo form_open('',$atribut)?>
 				<label class="control-label" for="lastname">KEANGGOTAAN</label>
 				<div class="controls">
 					<?php 
-					$dropdownKeanggotaan = $this->addon->getOptionKeanggotaan();
+					$dropdownKeanggotaan = $this->keanggotaan->getOptionKeanggotaan();
 					 echo form_dropdown('keanggotaan_id',$dropdownKeanggotaan,$row->keanggotaan_id,'required="required"');?>
 				</div>
 			</div>
-			<div class="control-group">
+			<!-- <div class="control-group">
 				<label class="control-label" for="username">DEPARTEMEN</label>
 				<div class="controls">
 					<input class="span12" id="username" name="departemen" type="text" value="<?php echo $row->departemen?>" />
 				</div>
-			</div>
+			</div> -->
 			<div class="control-group">
 				<label class="control-label" for="lembar2">TANGGAL MASUK</label>
 				<div class="controls">

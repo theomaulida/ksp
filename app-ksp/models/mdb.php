@@ -54,6 +54,9 @@ class Mdb extends CI_Model
     {
         $this->kode = $this->input->post('kode');
         $this->nama = $this->input->post('nama');
+        $this->alamat = $this->input->post('alamat');
+        $this->hp = $this->input->post('hp');
+        $this->keanggotaan_id = $this->input->post('keanggotaan_id');
         $this->departemen = $this->input->post('departemen');
         $this->tgl_masuk = $this->input->post('tgl_masuk');
         $this->db->update('nasabah',$this,array('id'=>$id));
@@ -106,7 +109,7 @@ class Mdb extends CI_Model
 
     function formSimpan($kode)
     {
-        $this->db->select('nasabah.kode, nasabah.nama, nasabah.departemen, simpanan2.jumlah, simpanan2.id, simpanan2.sld as saldo', FALSE);
+        $this->db->select('nasabah.id as id_nasabah, nasabah.kode, nasabah.nama, nasabah.departemen, simpanan2.jumlah, simpanan2.id, simpanan2.sld as saldo', FALSE);
         $this->db->from('nasabah');
         $this->db->join('(select * from simpanan where kode_nasabah ='.$kode.' order by tanggal desc limit 1) as simpanan2','simpanan2.kode_nasabah=nasabah.kode', 'left');
         $this->db->where('nasabah.kode', $kode);

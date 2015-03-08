@@ -19,7 +19,7 @@
 					<th>NO</th>
 					<th>NO_NASABAH</th>
 					<th width="20%">NAMA_NASABAH</th>
-					<th>DEPARTEMEN</th>
+					<!-- <th>DEPARTEMEN</th> -->
 					<th>TGL MASUK</th>
 					<th class="hidden-print" width="13%">ACTION</th>
 					<th class="hidden-print" width="27%">SIMPAN/PINJAM </th>

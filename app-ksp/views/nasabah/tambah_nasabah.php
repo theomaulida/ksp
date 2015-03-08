@@ -48,12 +48,12 @@ echo form_open('',$atribut)?>
 					 echo form_dropdown('keanggotaan_id',$dropdownKeanggotaan,set_value('keanggotaan_id'),'required="required"');?>
 				</div>
 			</div>
-			<div class="control-group">
+			<!-- <div class="control-group">
 				<label class="control-label" for="username">DEPARTEMEN</label>
 				<div class="controls">
 					<input class="span12" id="username" name="departemen" type="text" value="<?php echo set_value('departemen')?>" />
 				</div>
-			</div>
+			</div> -->
 			<div class="control-group">
 				<label class="control-label" for="lembar2">TANGGAL MASUK</label>
 				<div class="controls">

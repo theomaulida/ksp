@@ -4,6 +4,7 @@ class Main extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model("mdb");
+		$this->load->model("nasabah");
 		$this->load->model("keanggotaan");
 		$this->load->helper("form");
 		$this->load->helper("date");
@@ -86,10 +87,10 @@ class Main extends CI_Controller {
 		{
 			$this->output->enable_profiler(FALSE);
 			$this->load->library('datatables');
-	        $this->datatables->select('id, kode, nama, departemen, tgl_masuk');
+	        $this->datatables->select('id, kode, nama, tgl_masuk');
 	        $this->datatables->from('nasabah');
-	        $this->datatables->add_column('Action_data', anchor('main/nasabah/edit/$1','EDIT','class="btn btn-warning btn-mini hidden-print"').
-	        	anchor('main/nasabah/delete/$1','DELETE',array('class'=>'btn btn-danger btn-mini hidden-print', 'onClick'=>'return confirm(\'Apakah Anda benar-benar akan menghapus data ini?\')')), 'id');
+	        $this->datatables->edit_column('nama', anchor('main/nasabah/detail/$1','$2'), 'id, nama');
+	        $this->datatables->add_column('Action_data', anchor('main/nasabah/edit/$1','EDIT','class="btn btn-warning btn-mini hidden-print"').anchor('main/nasabah/delete/$1','DELETE',array('class'=>'btn btn-danger btn-mini hidden-print', 'onClick'=>'return confirm(\'Apakah Anda benar-benar akan menghapus data ini?\')')), 'id');
 	        $this->datatables->add_column('Action_Simpan/pinjam',
 	        	anchor('main/simpanan/add?kode=$1', 'SIMPAN','class="btn btn-success btn-mini hidden-print"').' '.
 	        	anchor('main/simpanan/ambil?kode=$1', 'AMBIL','class="btn btn-info btn-mini hidden-print"').' '.
@@ -137,6 +138,10 @@ class Main extends CI_Controller {
 				case 'delete':
 					$this->_delete('nasabah',$id);
 					break;
+				case 'detail':
+					$data['data'] = $id;
+					$this->_template('nasabah/detail_nasabah',$data);
+					break;
 				default:
 					$this->_template('nasabah/nasabah');
 					break;
@@ -151,7 +156,7 @@ class Main extends CI_Controller {
 		{
 			$this->output->enable_profiler(FALSE);
 			$this->load->library('datatables');
-	        $this->datatables->select('id, jenis, bunga_simpanan, denda_pinjaman, keterangan');
+	        $this->datatables->select('id, jenis,simpanan_pokok, simpanan_wajib, bunga_simpanan, denda_pinjaman, keterangan');
 	        $this->datatables->from('keanggotaan');
 	        $this->datatables->add_column('Action_data', anchor('main/keanggotaan/edit/$1','EDIT','class="btn btn-warning btn-mini hidden-print"').
 	        	anchor('main/keanggotaan/delete/$1','DELETE',array('class'=>'btn btn-danger btn-mini hidden-print', 'onClick'=>'return confirm(\'Apakah Anda benar-benar akan menghapus data ini?\')')), 'id');

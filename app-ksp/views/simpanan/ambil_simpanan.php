@@ -34,12 +34,7 @@ echo validation_errors();
 				<div class="controls"><input class="span6" id="username" value="<?php echo $row->nama?>" type="text" disabled/>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label" for="username">DEPARTEMEN</label>
-				<div class="controls"><input class="span6" id="username" value="<?php echo $row->departemen?>" type="text" disabled/>
-					
-				</div>
-			</div>
+			
 			<div class="control-group">
 				<label class="control-label" for="saldo">SALDO</label>
 				<div class="controls"><input class="span6" id="saldo" value="<?php echo buatrp($row->saldo)?>" type="text" disabled/>
