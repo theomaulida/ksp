@@ -11,6 +11,8 @@ class Main extends CI_Controller {
 		$this->load->library('export');
 		$this->load->library('form_validation');
 		// $this->output->enable_profiler(TRUE);
+		$this->load->model('trs');
+		$this->trs->addBunga();
 	}
 
 	public function index()
@@ -89,7 +91,7 @@ class Main extends CI_Controller {
 			$this->load->library('datatables');
 	        $this->datatables->select('id, kode, nama, tgl_masuk');
 	        $this->datatables->from('nasabah');
-	        $this->datatables->edit_column('nama', anchor('main/nasabah/detail/$1','$2'), 'id, nama');
+	        $this->datatables->edit_column('nama', anchor('main/nasabah/detail/$1','$2'), 'kode, nama');
 	        $this->datatables->add_column('Action_data', anchor('main/nasabah/edit/$1','EDIT','class="btn btn-warning btn-mini hidden-print"').anchor('main/nasabah/delete/$1','DELETE',array('class'=>'btn btn-danger btn-mini hidden-print', 'onClick'=>'return confirm(\'Apakah Anda benar-benar akan menghapus data ini?\')')), 'id');
 	        $this->datatables->add_column('Action_Simpan/pinjam',
 	        	anchor('main/simpanan/add?kode=$1', 'SIMPAN','class="btn btn-success btn-mini hidden-print"').' '.

@@ -5,7 +5,7 @@ class Mdb extends CI_Model
     {
         parent::__construct();
         $this->load->database();
-        // $this->output->enable_profiler(TRUE);
+        $this->output->enable_profiler(TRUE);
     }
 
     function check_login($data){
@@ -94,7 +94,6 @@ class Mdb extends CI_Model
     function add_pinjaman()
     {
         $this->kode_nasabah = $this->input->post('kode');
-
         $time = strtotime($this->input->post('tanggal'));
         $tanggal = mdate('%Y-%m-%d',$time);
         
@@ -176,6 +175,7 @@ class Mdb extends CI_Model
         {
             array_push($data, array('id'=>$k->id, 'sld'=>$k->saldo));
         }
+        // print_r($data);
         $this->db->update_batch('simpanan', $data, 'id'); 
         return $query->result();
     }
