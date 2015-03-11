@@ -23,7 +23,11 @@ class Trs extends CI_Model
                     $n2 = $this->mdb->getSaldoTerakhir($kode);
                     if($n2){
                         foreach ($n2 as $key2);
-                        if($key1->jenis=="Masyarakat" && $key2->saldo>=1000000){
+                        if($key1->keanggotaan_id=="1" && $key2->saldo>=1000000){ //bunga masyarakat setelah simpanan > 1jt
+                            $bunga = ($key1->bunga_simpanan/100)*$key2->saldo;
+                            $this->insertBunga($kode, $bunga);
+                        }
+                        else if($key1->keanggotaan_id=="2" && $this->cekSimpananPokok($kode)){ //bunga anggota setelah ada simpanan pokok
                             $bunga = ($key1->bunga_simpanan/100)*$key2->saldo;
                             $this->insertBunga($kode, $bunga);
                         }
@@ -31,7 +35,7 @@ class Trs extends CI_Model
                 }
             }   
         }
-
+        $this->db->update('preference',array('value'=>date('Y-m-d')),'attr = "last_check_bunga"');
     }
 
     function insertBunga($kode, $bunga)
@@ -51,5 +55,25 @@ class Trs extends CI_Model
         $this->db->where('tanggal', date('Y-m').'-01');
         $query = $this->db->get('simpanan');
         return $query->result();
+    }
+
+    function cekSimpananPokok($kode){
+        $this->db->where('kode_nasabah',$kode);
+        $this->db->where('jenis','Pokok');
+        $this->db->where('date_format(tanggal, "%Y-%m") =', date('Y-m'));
+        $query = $this->db->get('simpanan');
+        return $query->result();
+    }
+
+    function last_check_bunga()
+    {
+        $this->db->where('attr','last_check_bunga');
+        $query = $this->db->get('preference');
+        foreach ($query->result() as $key);
+        if(substr($key->value,0,7) == date('Y-m')){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }

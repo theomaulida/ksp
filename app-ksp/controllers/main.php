@@ -10,9 +10,12 @@ class Main extends CI_Controller {
 		$this->load->helper("date");
 		$this->load->library('export');
 		$this->load->library('form_validation');
-		// $this->output->enable_profiler(TRUE);
 		$this->load->model('trs');
-		$this->trs->addBunga();
+		// $this->trs->cekSimpananPokok('001');
+		if(!$this->trs->last_check_bunga()){
+			$this->trs->addBunga();
+		}
+		// $this->output->enable_profiler(TRUE);
 	}
 
 	public function index()

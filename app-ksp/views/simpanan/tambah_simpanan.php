@@ -45,7 +45,7 @@ echo validation_errors();
 			
 			<div class="control-group">
 				<label class="control-label" for="keanggotaan">KEANGGOTAAN</label>
-				<?php $a = $this->nasabah->getDetail($row->id_nasabah); foreach ($a as $key);?>
+				<?php $a = $this->nasabah->getDetail($row->kode); foreach ($a as $key);?>
 				<div class="controls"><input class="span6" id="keanggotaan" value="<?php echo $key->jenis?>" type="text" disabled/>
 				</div>
 			</div>

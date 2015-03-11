@@ -64,7 +64,7 @@
 				</tr>
 			<?php $i++; endforeach;
 				function buatrp($angka){
-        			$jadi = number_format($angka,0,',','.');
+        			$jadi = number_format($angka,2,',','.');
     	    		return $jadi;
     			}	
 			?>

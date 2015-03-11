@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.17)
 # Database: ksp
-# Generation Time: 2015-03-08 15:19:47 +0000
+# Generation Time: 2015-03-11 01:04:56 +0000
 # ************************************************************
 
 
@@ -34,67 +34,6 @@ CREATE TABLE `cicilan` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `cicilan` WRITE;
-/*!40000 ALTER TABLE `cicilan` DISABLE KEYS */;
-
-INSERT INTO `cicilan` (`id`, `kode_nasabah`, `cicilan_ke`, `jumlah`, `tanggal`)
-VALUES
-	(1,2,1,100000,'2014-04-27'),
-	(2,1,1,20965000,'2014-05-24'),
-	(3,1,2,20676250,'2014-05-25'),
-	(4,1,1,833,'2015-02-19'),
-	(5,2,1,240000,'2015-02-19');
-
-/*!40000 ALTER TABLE `cicilan` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table import_temp
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `import_temp`;
-
-CREATE TABLE `import_temp` (
-  `kode` int(11) NOT NULL,
-  `amount` int(20) NOT NULL,
-  PRIMARY KEY (`kode`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-LOCK TABLES `import_temp` WRITE;
-/*!40000 ALTER TABLE `import_temp` DISABLE KEYS */;
-
-INSERT INTO `import_temp` (`kode`, `amount`)
-VALUES
-	(1,20000),
-	(926,1115500),
-	(967,4359850),
-	(1119,12734361),
-	(1155,7000000),
-	(1160,5000000),
-	(1244,3188630),
-	(1281,3677687),
-	(1309,4198611),
-	(1316,4716667),
-	(1395,3225209),
-	(1408,4022783),
-	(1440,7590625),
-	(1467,5751627),
-	(1503,9797760),
-	(1509,5524750),
-	(1543,11540921),
-	(1547,4507950),
-	(1548,9545259),
-	(1554,4352238),
-	(1556,7946726),
-	(1558,10000000),
-	(1563,2571662),
-	(1566,7218003),
-	(1572,4326625),
-	(1575,9474383),
-	(1634,4336111);
-
-/*!40000 ALTER TABLE `import_temp` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table keanggotaan
@@ -144,18 +83,6 @@ CREATE TABLE `nasabah` (
   UNIQUE KEY `kode` (`kode`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-LOCK TABLES `nasabah` WRITE;
-/*!40000 ALTER TABLE `nasabah` DISABLE KEYS */;
-
-INSERT INTO `nasabah` (`id`, `kode`, `nama`, `departemen`, `alamat`, `hp`, `keanggotaan_id`, `tgl_masuk`)
-VALUES
-	(1,'001','Aris Setyono','','Trenggalek','085259838599',1,'2014-11-11'),
-	(2,'002','setyo','','','',1,'2015-02-08'),
-	(3,'003','agus','','','',3,'2014-07-01'),
-	(4,'004','Budi Waseso','Dalam Negeri','Jakarta Utara','085259838599',2,'2015-03-12');
-
-/*!40000 ALTER TABLE `nasabah` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table pinjaman
@@ -174,15 +101,26 @@ CREATE TABLE `pinjaman` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `pinjaman` WRITE;
-/*!40000 ALTER TABLE `pinjaman` DISABLE KEYS */;
 
-INSERT INTO `pinjaman` (`id`, `kode_nasabah`, `jenis`, `jumlah`, `lama`, `tanggal`, `status`)
+
+# Dump of table preference
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `preference`;
+
+CREATE TABLE `preference` (
+  `attr` varchar(200) DEFAULT NULL,
+  `value` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+LOCK TABLES `preference` WRITE;
+/*!40000 ALTER TABLE `preference` DISABLE KEYS */;
+
+INSERT INTO `preference` (`attr`, `value`)
 VALUES
-	(1,1,'Uang',20000000,24,'2015-02-19','1'),
-	(2,2,'Uang',2000000,10,'2015-02-19','1');
+	('last_check_bunga','');
 
-/*!40000 ALTER TABLE `pinjaman` ENABLE KEYS */;
+/*!40000 ALTER TABLE `preference` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -195,29 +133,13 @@ CREATE TABLE `simpanan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode_nasabah` varchar(100) NOT NULL,
   `tanggal` date NOT NULL,
-  `jenis` enum('Pokok','Wajib','Sukarela','Surplus','Ambil') NOT NULL,
-  `jumlah` int(20) NOT NULL,
-  `sld` int(20) DEFAULT NULL,
+  `jenis` enum('Pokok','Wajib','Sukarela','Bunga','Ambil') NOT NULL,
+  `jumlah` float NOT NULL,
+  `sld` float DEFAULT NULL,
   `created` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `simpanan` WRITE;
-/*!40000 ALTER TABLE `simpanan` DISABLE KEYS */;
-
-INSERT INTO `simpanan` (`id`, `kode_nasabah`, `tanggal`, `jenis`, `jumlah`, `sld`, `created`)
-VALUES
-	(1,'001','2015-02-19','Sukarela',100000,100000,1424333600),
-	(2,'002','2015-02-19','Pokok',50000,50000,1424335277),
-	(3,'002','2015-02-19','Wajib',200000,250000,1424335334),
-	(4,'002','2015-02-19','Sukarela',300000,550000,1424335386),
-	(5,'002','2014-11-05','Sukarela',200000,750000,1424335453),
-	(6,'002','2015-02-19','Ambil',-25000,725000,1424335580),
-	(7,'004','2015-03-08','Wajib',5000,5000,1425818153),
-	(8,'001','2015-03-08','Pokok',500,100500,1425826779);
-
-/*!40000 ALTER TABLE `simpanan` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table user

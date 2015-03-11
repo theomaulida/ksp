@@ -13,14 +13,14 @@ echo form_open('',$atribut)?>
 			<div class="control-group">
 				<label class="control-label" for="firstname">KODE PEGAWAI</label>
 				<div class="controls">
-					<input class="span12" id="firstname" name="kode" type="text" value="<?php echo $row->kode?>" required autofocus/>
+					<input class="span12" id="firstname" name="kode" type="text" value="<?php echo $row->kode?>" readonly/>
 					<?php echo form_error('kode','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="lastname">NAMA</label>
 				<div class="controls">
-					<input class="span12" id="lastname" name="nama" type="text" value="<?php echo $row->nama?>" required/>
+					<input class="span12" id="lastname" name="nama" type="text" value="<?php echo $row->nama?>" required autofocus/>
 					<?php echo form_error('nama','<label class="label-warning">','</label>'); ?>
 				</div>
 			</div>
