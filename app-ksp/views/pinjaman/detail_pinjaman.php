@@ -20,7 +20,7 @@
 <?php
 
 $pinjam = $key->jumlah;
-$bunga = 2/100;
+$bunga = $key->bunga/100;
 $angsur = $key->lama;
 $angsuran = $pinjam/$angsur;
 
@@ -40,7 +40,7 @@ function fbuatrp($angka){
 		<th>Jasa Uang</th>
 		<th>Total Bayar</th>
 		<th>Saldo</th>
-		<th>Status</th>
+		<th>Tgl_Bayar</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -58,7 +58,7 @@ if($i>0) $bayar = $angsuran+$jasa;
 
 ?>
 	<tr>
-		<td><?=$i?></td>
+		<td><?php echo $i?></td>
 		<td style="text-align:right"><?php if($i>0) echo fbuatrp(round($angsuran))?></td>
 		<td style="text-align:right"><?php if($i>0) echo fbuatrp(round($jasa))?></td>
 		<td style="text-align:right"><?php if($i>0) echo fbuatrp(round($bayar))?></td>
@@ -68,7 +68,26 @@ if($i>0) $bayar = $angsuran+$jasa;
 			// echo round($saldo[$i]);
 			?>
 		</td>
-		<td><?php if($i<=$key->status && $i!=0) echo 'LUNAS' ?></td>
+		<td>
+			<?php 
+			if($i!=0){
+				$c = $this->trs->getCicilan($kode, $i);
+				foreach ($c as $k);
+				if($i<=$key->status)
+				{ 
+					echo $k->tanggal;
+				}
+				else
+				{
+					if($k->cicilan_ke+1 == $i)
+					{
+						echo '<a href="'.site_url('main/pinjaman/bayar').'?kode='.$kode.'&cicilan_ke='.$i.'&jumlah='.round($bayar).'" type="button" class="btn btn-inverse btn-mini hidden-print"><i></i>BAYAR</a>';
+						echo '<a onclick="return confirm(\'Lunasi seluruh angsuran dengan total '.fbuatrp(round($saldo[$i])).'?\')" href="'.site_url('main/pinjaman/bayar').'?kode='.$kode.'&cicilan_ke='.$key->lama.'&jumlah='.round($saldo[$i]).'" type="button" class="btn btn-warning btn-mini hidden-print"><i></i>Lunasi</a>';
+					}
+				}
+			}
+			?>
+		</td>
 	</tr>
 
 <?php 
@@ -80,9 +99,9 @@ if($i>0) $bayar = $angsuran+$jasa;
 ?>
 <tr>
 	<td></td>
-	<td style="text-align:right"><b><?=fbuatrp($total_angsuran)?></b></td>
-	<td style="text-align:right"><b><?=fbuatrp($total_jasa)?></b></td>
-	<td style="text-align:right"><b><?=fbuatrp($total_bayar)?></b></td>
+	<td style="text-align:right"><b><?php echo fbuatrp($total_angsuran)?></b></td>
+	<td style="text-align:right"><b><?php echo fbuatrp($total_jasa)?></b></td>
+	<td style="text-align:right"><b><?php echo fbuatrp($total_bayar)?></b></td>
 	<td></td>
 </tr>
 </tbody>
@@ -99,15 +118,15 @@ if($i>0) $bayar = $angsuran+$jasa;
 	<tbody>
 		<tr>
 			<td><b>DIPINJAM</b></td>
-			<td style="text-align:right"><?=fbuatrp($pinjam)?></td>
+			<td style="text-align:right"><?php echo fbuatrp($pinjam)?></td>
 		</tr>
 		<tr>
 			<td><b>BUNGA</b></td>
-			<td style="text-align:right"><?=fbuatrp($total_jasa)?></td>
+			<td style="text-align:right"><?php echo fbuatrp($total_jasa)?></td>
 		</tr>
 		<tr>
 			<td><b>DIBAYAR</b></td>
-			<td style="text-align:right"><?=fbuatrp($total_bayar)?></td>
+			<td style="text-align:right"><?php echo fbuatrp($total_bayar)?></td>
 		</tr>
 		<tr>
 			<td></td>

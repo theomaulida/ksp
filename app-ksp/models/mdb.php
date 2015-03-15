@@ -5,7 +5,7 @@ class Mdb extends CI_Model
     {
         parent::__construct();
         $this->load->database();
-        $this->output->enable_profiler(TRUE);
+        // $this->output->enable_profiler(TRUE);
     }
 
     function check_login($data){
@@ -98,8 +98,10 @@ class Mdb extends CI_Model
         $tanggal = mdate('%Y-%m-%d',$time);
         
         $this->tanggal = $tanggal;
-        $this->jenis = $this->input->post('jenis');
+        $this->jenis = 'Uang';//$this->input->post('jenis');
         $this->jumlah = $this->input->post('nominal');
+        $this->bunga = $this->input->post('bunga');
+        $this->total_bayar = $this->input->post('total_bayar');
         $this->lama = $this->input->post('lama');
         $this->status = '0';
 

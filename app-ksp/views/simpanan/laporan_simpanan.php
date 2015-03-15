@@ -19,7 +19,7 @@
 		<h4 class="heading"><?php
 			echo form_open('','method="get"');
 			// $default = ($this->input->get('per')) ? $this->input->get('per') : mdate('%Y-%m',now());
-			echo 'Jenis simpanan : '.form_dropdown('jenis', array(''=>'-- Semua --','Pokok'=>'Pokok','Wajib'=>'Wajib','Sukarela'=>'Sukarela','Surplus'=>'Sukarela Plus' ), $this->input->get('jenis'), 'onChange="this.form.submit()"');
+			echo 'Jenis simpanan : '.form_dropdown('jenis', array(''=>'-- Semua --','Pokok'=>'Pokok','Wajib'=>'Wajib','Sukarela'=>'Sukarela','Bunga'=>'Bunga Simpanan' ), $this->input->get('jenis'), 'onChange="this.form.submit()"');
 			// echo form_close();
 			?>
 		</h4>

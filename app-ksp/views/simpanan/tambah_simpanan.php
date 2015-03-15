@@ -73,7 +73,7 @@ echo validation_errors();
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="nominal">NOMINAL</label>
-				<div class="controls"><input class="span6" id="nominal" name="nominal" type="number" step="100" min="100" required/>
+				<div class="controls"><input class="span6" id="nominal" name="nominal" type="number" required/>
 				</div>
 			</div>
 </fieldset>

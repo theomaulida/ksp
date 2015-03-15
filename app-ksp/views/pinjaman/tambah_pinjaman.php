@@ -55,48 +55,57 @@ if($this->input->get('itung')){
 				<div class="controls"><input class="span6" id="username" value="<?php echo $row->nama?>" type="text" disabled/>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label" for="username">DEPARTEMEN</label>
-				<div class="controls"><input class="span6" id="username" value="<?php echo $row->departemen?>" type="text" disabled/>
-					
-				</div>
-			</div>
+			
 <!-- 			<div class="control-group">
 				<label class="control-label" for="saldo">SALDO SIMPANAN</label>
-				<div class="controls"><input class="span6" id="saldo" value="<?php echo buatrp($row->saldo)?>" type="text" disabled/>
+				<div class="controls"><input class="span6" id="saldo" value="<?php //echo buatrp($row->saldo)?>" type="text" disabled/>
 				</div>
 			</div> -->
 
 			<div class="control-group">
-				<label class="control-label">TANGGAL</label>
-				<div class="controls">
-					<input type="text" name="tanggal" id="datepicker" value="<?php echo mdate('%m/%d/%Y', now())?>" <?=$disabled?>/>
+				<label class="control-label" for="keanggotaan">KEANGGOTAAN</label>
+				<?php $a = $this->nasabah->getDetail($row->kode); foreach ($a as $key);?>
+				<div class="controls"><input class="span6" id="keanggotaan" value="<?php echo $key->jenis?>" type="text" disabled/>
 				</div>
 			</div>
 
 			<div class="control-group">
+				<label class="control-label" for="bunga">BUNGA PINJAMAN</label>
+				<div class="controls"><input name="bunga" class="span1" id="bunga" value="<?php echo $key->bunga_pinjaman?>" type="text" readonly/> %
+					
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label">TANGGAL</label>
+				<div class="controls">
+					<input type="text" name="tanggal" id="datepicker" value="<?php echo mdate('%m/%d/%Y', now())?>" <?php echo $disabled?>/>
+				</div>
+			</div>
+
+<!-- 			<div class="control-group">
 				<label class="control-label" for="jt">JENIS PINJAMAN</label>
 				<div class="controls">
 					<?php 
-					 echo form_dropdown('jenis',array(''=>'-- Pilih --','Uang'=>'Uang','Barang'=>'Barang'),$this->input->get('jenis'),'required="required" '.$disabled);?>
+					 //echo form_dropdown('jenis',array(''=>'-- Pilih --','Uang'=>'Uang','Barang'=>'Barang'),$this->input->get('jenis'),'required="required" '.$disabled);?>
 				</div>
-			</div>
+			</div> -->
 			<div class="control-group">
 				<label class="control-label" for="nominal">NOMINAL</label>
-				<div class="controls"><input class="span6" id="nominal" name="nominal" type="number" step="100" min="100" value="<?=$this->input->get('nominal')?>" required <?=$disabled?>/>
+				<div class="controls"><input class="span6" id="nominal" name="nominal" type="number" value="<?php echo $this->input->get('nominal')?>" required <?php echo $disabled?>/>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="lama">ANGSURAN</label>
 				<div class="controls">
-					<input <?=$disabled?> class="span1" id="lama" name="lama" type="number" step="1" min="1" value="<?=$this->input->get('lama')?>" />
+					<input <?php echo $disabled?> class="span1" id="lama" name="lama" type="number" step="1" min="1" value="<?php echo $this->input->get('lama')?>" />
 					<span>Kali, atau Nominal Angsuran</span>
-					<input <?=$disabled?> class="span2" id="lama" name="angs" type="number" step="1" min="1" value="<?=$this->input->get('angs')?>" />
+					<input <?php echo $disabled?> class="span2" id="lama" name="angs" type="number" step="1" min="1" value="<?php echo $this->input->get('angs')?>" />
 				</div>
 			</div>
 </fieldset>
 <?php if($re_url!=''){ ?>
-	<a href="<?=$re_url?>" class="btn btn-icon btn-default"> EDIT </a>
+	<a href="<?php echo $re_url?>" class="btn btn-icon btn-default"> EDIT </a>
 <?php } ?>
 </div>
 <?php

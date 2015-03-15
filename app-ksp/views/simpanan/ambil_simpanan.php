@@ -57,7 +57,7 @@ echo validation_errors();
 			</div> -->
 			<div class="control-group">
 				<label class="control-label" for="nominal">NOMINAL</label>
-				<div class="controls"><input class="span6" id="nominal" name="nominal" type="number" min="1000" step="1000" max="<?php echo $row->saldo?>" required/>
+				<div class="controls"><input class="span6" id="nominal" name="nominal" type="number" max="<?php echo $row->saldo?>" required/>
 				</div>
 			</div>
 </fieldset>

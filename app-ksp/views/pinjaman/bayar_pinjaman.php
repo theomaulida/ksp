@@ -9,8 +9,8 @@ echo validation_errors();
 	<form method="get" class="form-horizontal">
 	<fieldset>
 	<div class="input-append control-group">
-	  	<label class="control-label" for="kode">NO. ANGGOTA</label><div class="controls"> 
-	  		<input class="span8" id="kode" name="kode" type="text" placeholder="NO. ANGGOTA" value="<?php echo $keyword; ?>" autofocus required/>
+	  	<label class="control-label" for="kode">NO. NASABAH</label><div class="controls"> 
+	  		<input class="span8" id="kode" name="kode" type="text" placeholder="NO. NASABAH" value="<?php echo $keyword; ?>" autofocus required/>
 	  	<button class="btn" type="submit"><i class="icon-search"></i></button></div>
 	</div>
 	</fieldset>
@@ -24,7 +24,7 @@ echo validation_errors();
 	 if($keyword!=""){
 	 	$result = $this->mdb->getPinjaman($keyword);
 			foreach ($result as $row);
-			if(!$result){echo "<h3>Data Tidak ditemukan</h3>Pastikan anda memasukkan nomor ANGGOTA dengan benar";}else{ ?>
+			if(!$result){echo "<h3>Data Pinjaman untuk nasabah ini tidak ditemukan</h3>Pastikan anda memasukkan nomor nasabah dengan benar";}else{ ?>
 <?php echo form_open('',array('class'=>'form-horizontal','style'=>'margin-bottom: 0;'));?>
 <div class="widget widget-4 widget-body-white">
 		<fieldset>
@@ -62,17 +62,19 @@ echo validation_errors();
 				<label class="control-label" for="jt">Angsuran Ke</label>
 				<div class="controls">
 					<?php 
+					$cicilan_ke = $this->input->get('cicilan_ke');
+					$nominal = $this->input->get('jumlah');
 					$dropd[''] = '--Pilih--';
 					for ($i=1; $i <= $row->lama; $i++) { 
 						$dropd[$i]=$i;
 					}
-					 echo form_dropdown('cicilan_ke', $dropd, '', 'class="span2" required="required"');?>
+					 echo form_dropdown('cicilan_ke', $dropd, $cicilan_ke, 'class="span2" required="required"');?>
 				</div>
 			</div> 
 
 			<div class="control-group">
 				<label class="control-label" for="nominal">NOMINAL</label>
-				<div class="controls"><input class="span6" id="nominal" name="nominal" type="number" min="1" step="" max="<?php ?>" required/>
+				<div class="controls"><input class="span6" id="nominal" name="nominal" type="number" min="1" step="" max="<?php ?>" value="<?php echo $nominal?>" required/>
 				</div>
 			</div>
 </fieldset>

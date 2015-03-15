@@ -1,5 +1,5 @@
 <?php
-/* Automatic transaction [bunga, denda dsb]*/
+/* Automatic transaction [bunga,cicilan, denda dsb]*/
 class Trs extends CI_Model 
 {
     function __construct()
@@ -75,5 +75,13 @@ class Trs extends CI_Model
         }else{
             return 0;
         }
+    }
+
+    function getCicilan($kode, $cicilan_ke)
+    {
+        $this->db->where('kode_nasabah', $kode);
+        $this->db->where('cicilan_ke', $cicilan_ke);
+        $query = $this->db->get('cicilan');
+        return $query->result();
     }
 }

@@ -1,8 +1,9 @@
 <?php
-
-
+$kode = $this->input->get('kode');
 $pinjam = $this->input->get('nominal');
-$bunga = 2/100;
+
+$ab = $this->nasabah->getDetail($kode); foreach ($ab as $key2);
+$bunga = $key2->bunga_pinjaman/100;
 
 if($this->input->get('lama'))
 {
@@ -48,7 +49,7 @@ if($i>0) $bayar = $angsuran+$jasa;
 
 ?>
 	<tr>
-		<td><?=$i?></td>
+		<td><?php echo $i?></td>
 		<td style="text-align:right"><?php if($i>0) echo fbuatrp(round($angsuran))?></td>
 		<td style="text-align:right"><?php if($i>0) echo fbuatrp(round($jasa))?></td>
 		<td style="text-align:right"><?php if($i>0) echo fbuatrp(round($bayar))?></td>
@@ -69,9 +70,10 @@ if($i>0) $bayar = $angsuran+$jasa;
 ?>
 <tr>
 	<td></td>
-	<td style="text-align:right"><b><?=fbuatrp($total_angsuran)?></b></td>
-	<td style="text-align:right"><b><?=fbuatrp($total_jasa)?></b></td>
-	<td style="text-align:right"><b><?=fbuatrp($total_bayar)?></b></td>
+	<td style="text-align:right"><b><?php echo fbuatrp($total_angsuran)?></b></td>
+	<td style="text-align:right"><b><?php echo fbuatrp($total_jasa)?></b></td>
+	<input type="hidden" name="total_bayar" value="<?php echo $total_bayar ?>">
+	<td style="text-align:right"><b><?php echo fbuatrp($total_bayar)?></b></td>
 	<td></td>
 </tr>
 </tbody>
@@ -88,15 +90,15 @@ if($i>0) $bayar = $angsuran+$jasa;
 	<tbody>
 		<tr>
 			<td><b>DIPINJAM</b></td>
-			<td style="text-align:right"><?=fbuatrp($pinjam)?></td>
+			<td style="text-align:right"><?php echo fbuatrp($pinjam)?></td>
 		</tr>
 		<tr>
 			<td><b>BUNGA</b></td>
-			<td style="text-align:right"><?=fbuatrp($total_jasa)?></td>
+			<td style="text-align:right"><?php echo fbuatrp($total_jasa)?></td>
 		</tr>
 		<tr>
 			<td><b>DIBAYAR</b></td>
-			<td style="text-align:right"><?=fbuatrp($total_bayar)?></td>
+			<td style="text-align:right"><?php echo fbuatrp($total_bayar)?></td>
 		</tr>
 		<tr>
 			<td></td>

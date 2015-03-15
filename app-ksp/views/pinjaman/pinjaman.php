@@ -30,8 +30,8 @@
 		<table class="dynamicTable table table-striped table-bordered table-primary table-condensed">
 			<thead>
 				<tr>
-					<th>NO_ANGGOTA</th>
-					<th>NAMA_ANGGOTA</th>
+					<th>NO_NASABAH</th>
+					<th>NAMA_NASABAH</th>
 					<th>TANGGAL</th>
 					<th>JENIS</th>
 					<th>JUMLAH (RP)</th>

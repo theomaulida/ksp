@@ -315,7 +315,8 @@ class Main extends CI_Controller {
 			{
 				case 'add':
 					$this->form_validation->set_rules('tanggal', 'Tanggal', 'trim|required');
-					$this->form_validation->set_rules('jenis', 'Jenis Simpanan', 'trim|required');
+					// $this->form_validation->set_rules('jenis', 'Jenis Simpanan', 'trim|required');
+					$this->form_validation->set_rules('bunga', 'Bunga Simpanan', 'trim|required');
 					$this->form_validation->set_rules('nominal', 'Nominal', 'trim|required');
 					$this->form_validation->set_rules('lama', 'Waktu angsuran', 'trim|required');
 					if ($this->form_validation->run() == FALSE)
