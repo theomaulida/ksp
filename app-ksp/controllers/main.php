@@ -329,6 +329,23 @@ class Main extends CI_Controller {
 						redirect('main/pinjaman');
 					}
 					break;
+				case 'edit':
+					$this->form_validation->set_rules('tanggal', 'Tanggal', 'trim|required');
+					// $this->form_validation->set_rules('jenis', 'Jenis Simpanan', 'trim|required');
+					$this->form_validation->set_rules('bunga', 'Bunga Simpanan', 'trim|required');
+					$this->form_validation->set_rules('nominal', 'Nominal', 'trim|required');
+					$this->form_validation->set_rules('lama', 'Waktu angsuran', 'trim|required');
+					if ($this->form_validation->run() == FALSE)
+					{
+						$data['pinjaman']=$this->mdb->formPinjam($id);
+						$this->_template('pinjaman/edit_pinjaman',$data);
+					}
+					else
+					{
+						$this->mdb->edit_pinjaman();
+						redirect('main/pinjaman');
+					}
+					break;
 				case 'detail':
 					$data['kode'] = $id;
 					$this->_template('pinjaman/detail_pinjaman',$data);

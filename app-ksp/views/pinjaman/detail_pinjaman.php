@@ -1,11 +1,14 @@
+<?php 
+$pinjaman = $this->mdb->getPinjaman($kode);
+foreach ($pinjaman as $key); 
+ ?>
 <div class="container-fluid fixed">
 	<div id="content">
 <div class="separator"></div>
 <div class="widget widget-4 widget-body-white">
+	<?php if($key->status==0) {?> <div class="pull-right"><a href="<?php echo site_url('main/pinjaman/edit/'.$key->kode_nasabah.'?nominal='.$key->jumlah.'&lama='.$key->lama) ?>" class="btn btn-warning">EDIT</a></div> <?php } ?>
 	<div class="heading-buttons">
 		<?php 
-				$pinjaman = $this->mdb->getPinjaman($kode);
-				foreach ($pinjaman as $key); 
 				echo '<table>';
 				echo '<tr><td>NO. ANGGOTA </td><td>: <b>'.$key->kode.'</b></td> <td>TANGGAL PINJAM</td><td>: <b>'.$key->tanggal.'</b></td> </tr>';
 				echo '<tr><td> NAMA </td><td>: <b>'.$key->nama.'</b></td> <td>JENIS PINJAM</td><td>: <b>'.$key->jenis.'</b></td> </tr>';
